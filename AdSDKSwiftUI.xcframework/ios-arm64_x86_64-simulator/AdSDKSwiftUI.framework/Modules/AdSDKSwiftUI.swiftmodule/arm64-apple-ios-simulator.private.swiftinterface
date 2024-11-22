@@ -1,0 +1,45 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.2 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
+// swift-module-flags: -target arm64-apple-ios14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -module-name AdSDKSwiftUI -package-name com.adsdk.core
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+import AdSDKCore
+@_exported import AdSDKSwiftUI
+import Combine
+import DeveloperToolsSupport
+import Foundation
+import Swift
+import SwiftUI
+import UIKit.UIColor
+import UIKit.UIImage
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os
+@_Concurrency.MainActor @preconcurrency public struct AdView : SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public init(advertisement: any AdSDKCore.Advertisement)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s12AdSDKSwiftUI0A4ViewV4bodyQrvp", 0) __
+}
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func interstitial(_ state: SwiftUICore.Binding<AdSDKCore.AdInterstitialState>) -> some SwiftUICore.View
+  
+}
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func adsContainer(width: CoreFoundation.CGFloat? = nil, height: CoreFoundation.CGFloat? = nil, alignment: SwiftUICore.Alignment = .center) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func adsContainer(minWidth: CoreFoundation.CGFloat? = nil, idealWidth: CoreFoundation.CGFloat? = nil, maxWidth: CoreFoundation.CGFloat? = nil, minHeight: CoreFoundation.CGFloat? = nil, idealHeight: CoreFoundation.CGFloat? = nil, maxHeight: CoreFoundation.CGFloat? = nil, alignment: SwiftUICore.Alignment = .center) -> some SwiftUICore.View
+  
+}
+extension AdSDKCore.AdService {
+  final public var adSDKSwiftUIVersion: Swift.String {
+    get
+  }
+  #if compiler(>=5.3) && $TypedThrows
+  convenience public init(networkID: Swift.UInt, cacheSize: Swift.UInt8? = nil, configurationTimeout timeout: Foundation.TimeInterval? = nil) async throws(AdSDKCore.AdError)
+  #endif
+}
+extension AdSDKSwiftUI.AdView : Swift.Sendable {}
