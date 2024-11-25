@@ -1,0 +1,11 @@
+framework module AdSDKSwiftUI {
+  umbrella header "AdSDKSwiftUI.h"
+  export *
+
+  module * { export * }
+}
+
+module AdSDKSwiftUI.Swift {
+  header "AdSDKSwiftUI-Swift.h"
+  requires objc
+}
