@@ -22,6 +22,7 @@ struct InlineList: View {
                 }
             }
         }
+        .adsContainer()
         .navigationTitle("Inline Ads List")
         .task {
             await viewModel.fetchAds()
