@@ -23,7 +23,12 @@ struct Main: App {
                     Text("Loading")
                         .task { await viewModel.configure() }
                 case .ready(let adService):
-                    Text("Ready")
+                    VStack {
+                        NavigationLink("Inline Ads List") {
+                            InlineList(viewModel: .init(adService))
+                        }
+                    }
+
                 case .error(let description):
                     Text("Error: \(description)")
                 }
