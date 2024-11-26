@@ -27,6 +27,10 @@ struct Main: App {
                         NavigationLink("Inline Ads List") {
                             InlineList(viewModel: .init(adService))
                         }
+
+                        NavigationLink("Interstitial Screen") {
+                            Interstitial(viewModel: .init(adService))
+                        }
                     }
 
                 case .error(let description):
