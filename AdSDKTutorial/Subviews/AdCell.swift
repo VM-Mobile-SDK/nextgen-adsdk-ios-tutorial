@@ -63,8 +63,115 @@ private extension AdCellViewModel {
             request: request,
             placementType: .inline, // .inline by default
             targetURLHandler: nil, // Can be skipped
-            eventDelegate: nil // Can be skipped
+            eventDelegate: self
         )
+    }
+}
+
+extension AdCellViewModel: AdEventDelegate {
+    func unloadRequest() {
+        state = .error("Unloaded")
+        advertisement = nil
+    }
+
+    func trackingEventProcessed(
+        _ event: TrackingEvent,
+        processedURLs: [URL],
+        metadata: AdMetadata
+    ) {
+        switch event {
+        case .impression:
+            print("My ad is ready")
+        case .showingAsset(let id):
+            print("Asset with id \(id) currently presented on a screen.")
+        case .viewable(let percentage):
+            print("\(percentage)% of my ads are now visible on the screen.")
+        @unknown default: print("Unexpected event")
+        }
+
+        print("SDK notified server about that via URLs: \(processedURLs)")
+    }
+
+    func trackingEventProcessingFailed(
+        _ event: TrackingEvent,
+        processedURLs: [URL],
+        failedURLs: [URL : AdError]
+    ) async -> AdEventFailureAction {
+        switch event {
+        case .impression:
+            print("My ad is ready")
+        case .showingAsset(let id):
+            print("Asset with id \(id) currently presented on a screen.")
+        case .viewable(let percentage):
+            print("\(percentage)% of my ads are now visible on the screen.")
+        @unknown default: print("Unexpected event")
+        }
+
+        print("SDK notified server about that via URLs: \(processedURLs)")
+        print("But failed during requesting those: \(failedURLs)")
+
+        return .ignore
+    }
+
+    func tapEventProcessed(
+        _ event: TapEvent,
+        processedURL: URL,
+        metadata: AdMetadata
+    ) {
+        switch event {
+        case .tap, .tapURL:
+            print("My ad was tapped")
+            print("\(processedURL) opened for the user")
+        case .tapAsset(let id):
+            print("My banner with \(id) was tapped")
+            print("\(processedURL) opened for the user")
+        case .silentTap(let url):
+            print("My renderer want to process click counter \(url) redirect")
+            print("As a result of redirects we get \(url)")
+            print("This URL is NOT opened for the user")
+
+        @unknown default: print("Unexpected event")
+        }
+    }
+
+    func tapEventProcessingFailed(
+        _ event: TapEvent,
+        _ error: AdError
+    ) async -> AdEventFailureAction {
+        switch event {
+        case .tap, .tapURL:
+            print("My ad was tapped")
+        case .tapAsset(let id):
+            print("My banner with \(id) was tapped")
+        case .silentTap(let url):
+            print("My renderer want to process click counter \(url) redirect")
+        @unknown default: print("Unexpected event")
+        }
+
+        print("But failed during processing tap with error: \(error.localizedDescription)")
+
+        return .ignore
+    }
+
+    func rendererMessageReceived(name: String, message: String?) {
+        print("Renderer sent event \(name), message: \(String(describing: message)).")
+        print("We can create custom logic in the application based on it.")
+    }
+
+    func customTrackingEventProcessed(name: String, url: URL, metadata: AdMetadata) {
+        print("Renderer perform custom tracking event \(name)")
+        print("\(url) was requested")
+    }
+
+    func customTrackingEventProcessingFailed(
+        name: String,
+        url: URL,
+        _ error: AdError
+    ) async -> AdEventFailureAction {
+        print("Renderer perform custom tracking event \(name)")
+        print("But request to \(url) failed with error \(error.localizedDescription)")
+
+        return .ignore
     }
 }
 
