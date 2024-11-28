@@ -19,8 +19,25 @@ struct AdCell: View {
         case .loading:
             Text("Loading")
         case let .loaded(advertisement, aspectRatio):
-            AdView(advertisement: advertisement)
-                .aspectRatio(aspectRatio, contentMode: .fit)
+            VStack {
+                AdView(advertisement: advertisement)
+                    .aspectRatio(aspectRatio, contentMode: .fit)
+
+                HStack {
+                    Text("Price: €\(viewModel.price)")
+                    Spacer()
+                    NavigationLink("Add to basket") {
+                        Basket(viewModel: .init(
+                            id: viewModel.id,
+                            price: viewModel.price,
+                            viewModel.service
+                        ))
+                        .task { await viewModel.onBasket() }
+                    }
+                    .buttonStyle(.bordered)
+                }
+                .padding()
+            }
 
         case .error(let description):
             Text("Error: \(description)")
@@ -33,15 +50,18 @@ struct AdCell: View {
 @MainActor
 final class AdCellViewModel: Identifiable {
     let id: Int
+    let price: Int = .random(in: 10...200)
+    let service: AdService
     var state: CellState = .loading
 
     private var advertisement: Advertisement?
 
     init(id: Int, _ service: AdService, _ request: AdRequest) async {
         self.id = id
+        self.service = service
 
         do {
-            let advertisement = try await getAdvertisement(service, request)
+            let advertisement = try await getAdvertisement(request)
             self.advertisement = advertisement
 
             let ratio = advertisement.metadata?.aspectRatio ?? 2
@@ -56,7 +76,6 @@ final class AdCellViewModel: Identifiable {
 
 private extension AdCellViewModel {
     func getAdvertisement(
-        _ service: AdService,
         _ request: AdRequest
     ) async throws(AdError) -> Advertisement {
         try await service.makeAdvertisement(
@@ -65,6 +84,19 @@ private extension AdCellViewModel {
             targetURLHandler: nil, // Can be skipped
             eventDelegate: self
         )
+    }
+
+    func onBasket() async {
+        let request = TagRequest(
+            [.init(key: "MyTutorialStore", subkey: "Movies", value: "\(id)")],
+            timeout: nil // Can be skipped
+        )
+
+        do {
+            try await service.tagUser(request: request)
+        } catch {
+            print("Error during user tagging: \(error.localizedDescription)")
+        }
     }
 }
 
