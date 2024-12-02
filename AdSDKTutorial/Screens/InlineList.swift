@@ -27,6 +27,9 @@ struct InlineList: View {
         .task {
             await viewModel.fetchAds()
         }
+        .sheet(item: $viewModel.presentedTargetURL) {
+            Browser(targetURL: $0.url)
+        }
     }
 }
 
@@ -35,8 +38,16 @@ struct InlineList: View {
 @MainActor
 final class InlineListViewModel {
     var dataSource = [AdCellViewModel]()
+    var presentedTargetURL: TargetURL?
 
     private let service: AdService
+
+    @ObservationIgnored
+    lazy private var targetURLHandler: TargetTapURLHandler = {
+        .init { [weak self] targetURL in
+            self?.presentedTargetURL = targetURL
+        }
+    }()
 
     init(_ service: AdService) {
         self.service = service
@@ -60,12 +71,13 @@ extension InlineListViewModel {
             )
         }
 
-        dataSource = await getDataSource(service, requests)
+        dataSource = await getDataSource(service, requests, targetURLHandler)
     }
 
     private nonisolated func getDataSource(
         _ service: AdService,
-        _ requests: [AdRequest]
+        _ requests: [AdRequest],
+        _ targetURLHandler: TargetTapURLHandler
     ) async -> [AdCellViewModel] {
         await withTaskGroup(
             of: AdCellViewModel.self,
@@ -74,7 +86,7 @@ extension InlineListViewModel {
             for i in Int.zero..<requests.count {
                 let request = requests[i]
                 group.addTask {
-                    await .init(id: i, service, request)
+                    await .init(id: i, service, request, targetURLHandler)
                 }
             }
 

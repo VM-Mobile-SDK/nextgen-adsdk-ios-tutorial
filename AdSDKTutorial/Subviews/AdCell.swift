@@ -56,12 +56,21 @@ final class AdCellViewModel: Identifiable {
 
     private var advertisement: Advertisement?
 
-    init(id: Int, _ service: AdService, _ request: AdRequest) async {
+    init(
+        id: Int,
+        _ service: AdService,
+        _ request: AdRequest,
+        _ targetURLHandler: TargetTapURLHandler
+    ) async {
         self.id = id
         self.service = service
 
         do {
-            let advertisement = try await getAdvertisement(request)
+            let advertisement = try await getAdvertisement(
+                request,
+                targetURLHandler
+            )
+
             self.advertisement = advertisement
 
             let ratio = advertisement.metadata?.aspectRatio ?? 2
@@ -76,12 +85,13 @@ final class AdCellViewModel: Identifiable {
 
 private extension AdCellViewModel {
     func getAdvertisement(
-        _ request: AdRequest
+        _ request: AdRequest,
+        _ targetURLHandler: TargetTapURLHandler
     ) async throws(AdError) -> Advertisement {
         try await service.makeAdvertisement(
             request: request,
             placementType: .inline, // .inline by default
-            targetURLHandler: nil, // Can be skipped
+            targetURLHandler: targetURLHandler,
             eventDelegate: self
         )
     }
