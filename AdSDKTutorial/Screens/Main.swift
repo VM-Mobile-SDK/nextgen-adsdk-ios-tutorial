@@ -32,6 +32,13 @@ struct Main: App {
                             Interstitial(viewModel: .init(adService))
                         }
                     }
+                    .alert(
+                        "Please grant the permission to track the data.",
+                        isPresented: $viewModel.isGDPRAlertShown
+                    ) {
+                        Button("Allow") { viewModel.onGDPRChange(true) }
+                        Button("Deny", role: .cancel) { viewModel.onGDPRChange(false) }
+                    }
 
                 case .error(let description):
                     Text("Error: \(description)")
@@ -46,6 +53,7 @@ struct Main: App {
 @MainActor
 final class MainViewModel {
     var state: AppState = .loading
+    var isGDPRAlertShown = false
 
     private var service: AdService?
 }
@@ -61,10 +69,35 @@ extension MainViewModel {
 
             self.service = service
             state = .ready(service)
+            isGDPRAlertShown = true
 
         } catch {
             state = .error(error.localizedDescription)
         }
+    }
+
+    func onGDPRChange(_ permissionGranted: Bool) {
+        let consent = "isGranted=\(permissionGranted)"
+
+        guard let service,
+              let data = Data(base64Encoded: consent),
+              let encodedConsent = String(data: data, encoding: .utf8) else {
+            return
+        }
+
+        service.setAdRequestGlobalParameter(
+            \.gdpr,
+             .init(consent: encodedConsent, isRulesEnabled: true)
+        )
+
+        // service.removeAdRequestGlobalParameter(\.gdpr)
+
+        service.setTrackingGlobalParameter(
+            \.gdpr,
+             .init(consent: encodedConsent, isRulesEnabled: true)
+        )
+
+        // service.removeTrackingGlobalParameter(\.gdpr)
     }
 }
 
