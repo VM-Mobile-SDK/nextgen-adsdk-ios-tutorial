@@ -56,7 +56,10 @@ final class InlineListViewModel {
 
 extension InlineListViewModel {
     func fetchAds() async {
-        let requests = Array(repeating: 4810915, count: 5).map {
+        var ids: [UInt] = Array(repeating: 4810915, count: 5)
+        ids.insert(5227780, at: .zero)
+
+        let requests = ids.map {
             AdRequest(
                 contentUnit: $0,
                 profile: nil, // Can be skipped

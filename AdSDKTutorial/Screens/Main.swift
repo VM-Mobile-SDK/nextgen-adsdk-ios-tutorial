@@ -71,6 +71,7 @@ extension MainViewModel {
                 configurationTimeout: 60 // Can be skipped
             )
 
+            service.registerRenderer(TutorialRenderer.self, forName: "tutorialad")
             // do {
             //     try await service.setCacheSize(50)
             // } catch {
