@@ -14,6 +14,7 @@ import AdSDKSwiftUI
 @main
 struct Main: App {
     @State var viewModel = MainViewModel()
+    @Environment(\.locale) var locale: Locale
 
     var body: some Scene {
         WindowGroup {
@@ -39,6 +40,9 @@ struct Main: App {
                         Button("Allow") { viewModel.onGDPRChange(true) }
                         Button("Deny", role: .cancel) { viewModel.onGDPRChange(false) }
                     }
+                    .onChange(of: locale) {
+                        Task { await viewModel.onLocaleChange() }
+                    }
 
                 case .error(let description):
                     Text("Error: \(description)")
@@ -63,9 +67,15 @@ extension MainViewModel {
         do {
             let service = try await AdService(
                 networkID: 1800,
-                cacheSize: 100, // Can be skipped
+                cacheSize: 20,
                 configurationTimeout: 60 // Can be skipped
             )
+
+            // do {
+            //     try await service.setCacheSize(50)
+            // } catch {
+            //     print("Error during changing cache size: \(error.localizedDescription)")
+            // }
 
             self.service = service
             state = .ready(service)
@@ -98,6 +108,14 @@ extension MainViewModel {
         )
 
         // service.removeTrackingGlobalParameter(\.gdpr)
+    }
+
+    func onLocaleChange() async {
+        do {
+            try await service?.flushCache()
+        } catch {
+            print("Error during flushing cache: \(error.localizedDescription)")
+        }
     }
 }
 
