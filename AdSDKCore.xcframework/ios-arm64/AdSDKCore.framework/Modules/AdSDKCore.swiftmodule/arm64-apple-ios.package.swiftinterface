@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.2 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
+// swift-compiler-version: Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
 // swift-module-flags: -target arm64-apple-ios14.0 -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -module-name AdSDKCore -package-name com.adsdk.core
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface
 @_exported import AdSDKCore
@@ -128,7 +128,6 @@ public enum TapEvent : Swift.Hashable, Swift.Equatable, Swift.Sendable {
 public enum TrackingEvent : Swift.Hashable, Swift.Equatable, Swift.Sendable {
   case impression
   case viewable(percentage: AdSDKCore.AdVisibilityPercentage)
-  case showingAsset(id: Swift.String)
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: AdSDKCore.TrackingEvent, b: AdSDKCore.TrackingEvent) -> Swift.Bool
   public var hashValue: Swift.Int {
@@ -162,9 +161,6 @@ public protocol AdControllerDelegate : AnyObject, Swift.Sendable {
   #endif
   #if compiler(>=5.3) && $TypedThrows
   @_Concurrency.MainActor func performTrackingCustomEvent(name: Swift.String, url: Foundation.URL) async throws(AdSDKCore.AdError)
-  #endif
-  #if compiler(>=5.3) && $TypedThrows
-  @_Concurrency.MainActor func performShowingAssetTracking(id: Swift.String) async throws(AdSDKCore.AdError)
   #endif
   @_Concurrency.MainActor func sendMessage(name: Swift.String, message: Swift.String?)
   @_Concurrency.MainActor func unloadRequest()
@@ -242,6 +238,7 @@ extension AdSDKCore.AdRequestGlobalParameters {
     public let required: AdSDKCore.AdRequestGlobalParameters.DSARequirement
     public let pubRender: AdSDKCore.AdRequestGlobalParameters.DSAPubRender
     public let dataToPubs: AdSDKCore.AdRequestGlobalParameters.DSADataToPubs
+    public init(required: AdSDKCore.AdRequestGlobalParameters.DSARequirement, pubRender: AdSDKCore.AdRequestGlobalParameters.DSAPubRender, dataToPubs: AdSDKCore.AdRequestGlobalParameters.DSADataToPubs)
     public static func == (a: AdSDKCore.AdRequestGlobalParameters.DSA, b: AdSDKCore.AdRequestGlobalParameters.DSA) -> Swift.Bool
   }
   public enum DSARequirement : Swift.Int, Swift.Sendable {
