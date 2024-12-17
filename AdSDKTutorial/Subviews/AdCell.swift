@@ -124,8 +124,6 @@ extension AdCellViewModel: AdEventDelegate {
         switch event {
         case .impression:
             print("My ad is ready")
-        case .showingAsset(let id):
-            print("Asset with id \(id) currently presented on a screen.")
         case .viewable(let percentage):
             print("\(percentage)% of my ads are now visible on the screen.")
         @unknown default: print("Unexpected event")
@@ -142,8 +140,6 @@ extension AdCellViewModel: AdEventDelegate {
         switch event {
         case .impression:
             print("My ad is ready")
-        case .showingAsset(let id):
-            print("Asset with id \(id) currently presented on a screen.")
         case .viewable(let percentage):
             print("\(percentage)% of my ads are now visible on the screen.")
         @unknown default: print("Unexpected event")
