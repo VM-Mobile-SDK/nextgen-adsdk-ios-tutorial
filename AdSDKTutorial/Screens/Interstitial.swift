@@ -73,7 +73,7 @@ extension InterstitialViewModel {
                 request: request,
                 placementType: .interstitial, // Should be interstitial
                 targetURLHandler: nil, // Can be skipped
-                eventDelegate: nil // Can be skipped
+                eventDelegate: self
             )
 
             state = .ready
