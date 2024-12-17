@@ -3821,66 +3821,6 @@
           },
           {
             "kind": "Var",
-            "name": "showingAsset",
-            "printedName": "showingAsset",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(AdSDKCore.TrackingEvent.Type) -> (Swift.String) -> AdSDKCore.TrackingEvent",
-                "children": [
-                  {
-                    "kind": "TypeFunc",
-                    "name": "Function",
-                    "printedName": "(Swift.String) -> AdSDKCore.TrackingEvent",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "TrackingEvent",
-                        "printedName": "AdSDKCore.TrackingEvent",
-                        "usr": "s:9AdSDKCore13TrackingEventO"
-                      },
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Tuple",
-                        "printedName": "(id: Swift.String)",
-                        "children": [
-                          {
-                            "kind": "TypeNominal",
-                            "name": "String",
-                            "printedName": "Swift.String",
-                            "usr": "s:SS"
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "AdSDKCore.TrackingEvent.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "TrackingEvent",
-                        "printedName": "AdSDKCore.TrackingEvent",
-                        "usr": "s:9AdSDKCore13TrackingEventO"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "s:9AdSDKCore13TrackingEventO12showingAssetyACSS_tcACmF",
-            "mangledName": "$s9AdSDKCore13TrackingEventO12showingAssetyACSS_tcACmF",
-            "moduleName": "AdSDKCore",
-            "declAttributes": [
-              "RawDocComment"
-            ]
-          },
-          {
-            "kind": "Var",
             "name": "hashValue",
             "printedName": "hashValue",
             "children": [
@@ -4944,38 +4884,6 @@
             "declKind": "Func",
             "usr": "s:9AdSDKCore0A18ControllerDelegateP26performTrackingCustomEvent4name3urlySS_10Foundation3URLVtYaAA0A5ErrorOYKF",
             "mangledName": "$s9AdSDKCore0A18ControllerDelegateP26performTrackingCustomEvent4name3urlySS_10Foundation3URLVtYaAA0A5ErrorOYKF",
-            "moduleName": "AdSDKCore",
-            "genericSig": "<τ_0_0 where τ_0_0 : AdSDKCore.AdControllerDelegate>",
-            "sugared_genericSig": "<Self where Self : AdSDKCore.AdControllerDelegate>",
-            "protocolReq": true,
-            "declAttributes": [
-              "Custom",
-              "RawDocComment"
-            ],
-            "throwing": true,
-            "reqNewWitnessTableEntry": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "performShowingAssetTracking",
-            "printedName": "performShowingAssetTracking(id:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:9AdSDKCore0A18ControllerDelegateP27performShowingAssetTracking2idySS_tYaAA0A5ErrorOYKF",
-            "mangledName": "$s9AdSDKCore0A18ControllerDelegateP27performShowingAssetTracking2idySS_tYaAA0A5ErrorOYKF",
             "moduleName": "AdSDKCore",
             "genericSig": "<τ_0_0 where τ_0_0 : AdSDKCore.AdControllerDelegate>",
             "sugared_genericSig": "<Self where Self : AdSDKCore.AdControllerDelegate>",
@@ -8043,6 +7951,46 @@
                     "accessorKind": "get"
                   }
                 ]
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(required:pubRender:dataToPubs:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DSA",
+                    "printedName": "AdSDKCore.AdRequestGlobalParameters.DSA",
+                    "usr": "s:9AdSDKCore0A23RequestGlobalParametersC3DSAV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DSARequirement",
+                    "printedName": "AdSDKCore.AdRequestGlobalParameters.DSARequirement",
+                    "usr": "s:9AdSDKCore0A23RequestGlobalParametersC14DSARequirementO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DSAPubRender",
+                    "printedName": "AdSDKCore.AdRequestGlobalParameters.DSAPubRender",
+                    "usr": "s:9AdSDKCore0A23RequestGlobalParametersC12DSAPubRenderO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DSADataToPubs",
+                    "printedName": "AdSDKCore.AdRequestGlobalParameters.DSADataToPubs",
+                    "usr": "s:9AdSDKCore0A23RequestGlobalParametersC13DSADataToPubsO"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:9AdSDKCore0A23RequestGlobalParametersC3DSAV8required9pubRender10dataToPubsAeC14DSARequirementO_AC06DSAPubI0OAC07DSADatakL0Otcfc",
+                "mangledName": "$s9AdSDKCore0A23RequestGlobalParametersC3DSAV8required9pubRender10dataToPubsAeC14DSARequirementO_AC06DSAPubI0OAC07DSADatakL0Otcfc",
+                "moduleName": "AdSDKCore",
+                "declAttributes": [
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "init_kind": "Designated"
               },
               {
                 "kind": "Function",
@@ -16972,21 +16920,21 @@
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Core\/AdService\/AdService.swift",
       "kind": "IntegerLiteral",
-      "offset": 13021,
+      "offset": 13733,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Core\/Advertisement\/Entities\/AdMetadata.swift",
       "kind": "StringLiteral",
-      "offset": 6490,
+      "offset": 6510,
       "length": 6,
       "value": "\"body\""
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Core\/Advertisement\/Entities\/AdMetadata.swift",
       "kind": "StringLiteral",
-      "offset": 6518,
+      "offset": 6538,
       "length": 5,
       "value": "\"ext\""
     },
@@ -17000,49 +16948,49 @@
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/Requests\/GlobalParameters\/AdRequestGlobalParameters.swift",
       "kind": "IntegerLiteral",
-      "offset": 4759,
+      "offset": 5649,
       "length": 9,
       "value": "1"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/Requests\/GlobalParameters\/AdRequestGlobalParameters.swift",
       "kind": "IntegerLiteral",
-      "offset": 4867,
+      "offset": 5757,
       "length": 8,
       "value": "2"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/Requests\/GlobalParameters\/AdRequestGlobalParameters.swift",
       "kind": "IntegerLiteral",
-      "offset": 5019,
+      "offset": 5909,
       "length": 25,
       "value": "3"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/Requests\/GlobalParameters\/AdRequestGlobalParameters.swift",
       "kind": "IntegerLiteral",
-      "offset": 5402,
+      "offset": 6292,
       "length": 9,
       "value": "1"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/Requests\/GlobalParameters\/AdRequestGlobalParameters.swift",
       "kind": "IntegerLiteral",
-      "offset": 5461,
+      "offset": 6351,
       "length": 10,
       "value": "2"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/Requests\/GlobalParameters\/AdRequestGlobalParameters.swift",
       "kind": "IntegerLiteral",
-      "offset": 5755,
+      "offset": 6645,
       "length": 24,
       "value": "1"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/Requests\/GlobalParameters\/AdRequestGlobalParameters.swift",
       "kind": "IntegerLiteral",
-      "offset": 5830,
+      "offset": 6720,
       "length": 16,
       "value": "2"
     },
@@ -17105,42 +17053,42 @@
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/AdResponse.swift",
       "kind": "IntegerLiteral",
-      "offset": 6170,
+      "offset": 5141,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/AdResponse.swift",
       "kind": "IntegerLiteral",
-      "offset": 6185,
+      "offset": 5156,
       "length": 20,
       "value": "2"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/AdResponse.swift",
       "kind": "IntegerLiteral",
-      "offset": 6219,
+      "offset": 5190,
       "length": 8,
       "value": "3"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/AdResponse.swift",
       "kind": "IntegerLiteral",
-      "offset": 6262,
+      "offset": 5233,
       "length": 4,
       "value": "1000"
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/AdResponse.swift",
       "kind": "StringLiteral",
-      "offset": 6695,
+      "offset": 5666,
       "length": 14,
       "value": "\"customnative\""
     },
     {
       "filePath": "\/Users\/artemkvasnetskyi\/Projects\/Repositories\/Adition\/IOS\/sdk\/AdSDKCore\/AdSDKCore\/Entities\/AdResponse.swift",
       "kind": "StringLiteral",
-      "offset": 6770,
+      "offset": 5741,
       "length": 48,
       "value": "\"One of the assets does not have an `id` field.\""
     },
