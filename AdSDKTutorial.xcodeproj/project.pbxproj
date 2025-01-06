@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A4863CC22CEE095000BFE19C /* AdSDKCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4863CC02CEE095000BFE19C /* AdSDKCore.xcframework */; };
-		A4863CC42CEE095000BFE19C /* AdSDKSwiftUI.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4863CC12CEE095000BFE19C /* AdSDKSwiftUI.xcframework */; };
+		A409B37C2D2BEF5800BB8114 /* AdSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A409B37B2D2BEF5800BB8114 /* AdSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4863CC22CEE095000BFE19C /* AdSDKCore.xcframework in Frameworks */,
-				A4863CC42CEE095000BFE19C /* AdSDKSwiftUI.xcframework in Frameworks */,
+				A409B37C2D2BEF5800BB8114 /* AdSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +82,7 @@
 			);
 			name = AdSDKTutorial;
 			packageProductDependencies = (
+				A409B37B2D2BEF5800BB8114 /* AdSDK */,
 			);
 			productName = AdSDKTutorial;
 			productReference = A4863CAB2CEE07AC00BFE19C /* AdSDKTutorial.app */;
@@ -113,6 +112,9 @@
 			);
 			mainGroup = A4863CA22CEE07AC00BFE19C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A409B37A2D2BEF5800BB8114 /* XCRemoteSwiftPackageReference "nextgen-adsdk-ios-release" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A4863CAC2CEE07AC00BFE19C /* Products */;
 			projectDirPath = "";
@@ -354,6 +356,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A409B37A2D2BEF5800BB8114 /* XCRemoteSwiftPackageReference "nextgen-adsdk-ios-release" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release";
+			requirement = {
+				kind = exactVersion;
+				version = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A409B37B2D2BEF5800BB8114 /* AdSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A409B37A2D2BEF5800BB8114 /* XCRemoteSwiftPackageReference "nextgen-adsdk-ios-release" */;
+			productName = AdSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A4863CA32CEE07AC00BFE19C /* Project object */;
 }
