@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release",
       "state" : {
-        "revision" : "79ec483a79472e9c5d39f0090eb55a9b1920d65e",
-        "version" : "6.0.0"
+        "revision" : "f60ff2b17cc2227ec282da0bb94d6ac42bef0c8c",
+        "version" : "6.6.0"
       }
     }
   ],
