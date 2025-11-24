@@ -102,13 +102,13 @@ extension MainViewModel {
                  isDataCollectionAllowed.toCookieAccess()
             )
 
-            service.registerRenderer(TutorialRenderer.self, forName: "tutorialad")
             // do {
             //     try await service.setCacheSize(50)
             // } catch {
             //     print("Error during changing cache size: \(error.localizedDescription)")
             // }
 
+            service.registerRenderer(TutorialRenderer.self, forName: "tutorialad")
             self.service = service
             state = .ready(service)
 
