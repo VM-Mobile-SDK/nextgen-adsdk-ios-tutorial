@@ -14,6 +14,7 @@ import AdSDKSwiftUI
 @main
 struct Main: App {
     @State var viewModel = MainViewModel()
+    @State private var isDataCollectionAlertShown = true
 
     var body: some Scene {
         WindowGroup {
@@ -21,7 +22,30 @@ struct Main: App {
                 switch viewModel.state {
                 case .loading:
                     Text("Loading")
-                        .task { await viewModel.configure() }
+                        .alert(
+                            "Please grant the permission to collect the data",
+                            isPresented: $isDataCollectionAlertShown
+                        ) {
+                            Button("Allow") {
+                                isDataCollectionAlertShown = false
+
+                                Task {
+                                    await viewModel.configure(
+                                        isDataCollectionAllowed: true
+                                    )
+                                }
+                            }
+
+                            Button("Deny", role: .cancel) {
+                                isDataCollectionAlertShown = false
+
+                                Task {
+                                    await viewModel.configure(
+                                        isDataCollectionAllowed: false
+                                    )
+                                }
+                            }
+                        }
                 case .ready(let adService):
                     VStack {
                         NavigationLink("Inline Ads List") {
@@ -31,13 +55,6 @@ struct Main: App {
                         NavigationLink("Interstitial Screen") {
                             Interstitial(viewModel: .init(adService))
                         }
-                    }
-                    .alert(
-                        "Please grant the permission to track the data.",
-                        isPresented: $viewModel.isGDPRAlertShown
-                    ) {
-                        Button("Allow") { viewModel.onGDPRChange(true) }
-                        Button("Deny", role: .cancel) { viewModel.onGDPRChange(false) }
                     }
 
                 case .error(let description):
@@ -53,51 +70,40 @@ struct Main: App {
 @MainActor
 final class MainViewModel {
     var state: AppState = .loading
-    var isGDPRAlertShown = false
 
     private var service: AdService?
 }
 
 extension MainViewModel {
-    func configure() async {
+    func configure(isDataCollectionAllowed: Bool) async {
         do {
             let service = try await AdService(
                 networkID: 1800,
                 cacheSize: 100, // Can be skipped
-                configurationTimeout: 60 // Can be skipped
+                configurationTimeout: 60, // Can be skipped
+                globalParameters: GlobalParameters( // Can be skipped
+                    accessMode: isDataCollectionAllowed.toAccessMode()
+                )
+            )
+
+            service.setTrackingGlobalParameter(\.externalUID, .init(uid: "UID"))
+            service.removeTrackingGlobalParameter(\.externalUID)
+
+            service.setAdRequestGlobalParameter(\.externalUID, .init(uid: "UID"))
+            service.removeAdRequestGlobalParameter(\.externalUID)
+
+            // Can have unique global parameters for ad requests
+            service.setAdRequestGlobalParameter(
+                \.cookiesAccess,
+                 isDataCollectionAllowed.toCookieAccess()
             )
 
             self.service = service
             state = .ready(service)
-            isGDPRAlertShown = true
 
         } catch {
             state = .error(error.localizedDescription)
         }
-    }
-
-    func onGDPRChange(_ permissionGranted: Bool) {
-        let consent = "isGranted=\(permissionGranted)"
-
-        guard let service,
-              let data = Data(base64Encoded: consent),
-              let encodedConsent = String(data: data, encoding: .utf8) else {
-            return
-        }
-
-        service.setAdRequestGlobalParameter(
-            \.gdpr,
-             .init(consent: encodedConsent, isRulesEnabled: true)
-        )
-
-        // service.removeAdRequestGlobalParameter(\.gdpr)
-
-        service.setTrackingGlobalParameter(
-            \.gdpr,
-             .init(consent: encodedConsent, isRulesEnabled: true)
-        )
-
-        // service.removeTrackingGlobalParameter(\.gdpr)
     }
 }
 
@@ -107,5 +113,16 @@ extension MainViewModel {
         case loading
         case ready(AdService)
         case error(String)
+    }
+}
+
+// MARK: - Private Extensions
+private extension Bool {
+    func toAccessMode() -> GlobalParameters.AccessMode {
+        self ? .optIn : .optOut
+    }
+
+    func toCookieAccess() -> AdRequestGlobalParameters.CookiesAccess {
+        self ? .get : .noCookies
     }
 }
