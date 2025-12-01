@@ -12,8 +12,6 @@
 
 /* Begin PBXFileReference section */
 		A4863CAB2CEE07AC00BFE19C /* AdSDKTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdSDKTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4863CC02CEE095000BFE19C /* AdSDKCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = AdSDKCore.xcframework; sourceTree = "<group>"; };
-		A4863CC12CEE095000BFE19C /* AdSDKSwiftUI.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = AdSDKSwiftUI.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +38,6 @@
 			isa = PBXGroup;
 			children = (
 				A4863CAD2CEE07AC00BFE19C /* AdSDKTutorial */,
-				A4863CBF2CEE095000BFE19C /* Frameworks */,
 				A4863CAC2CEE07AC00BFE19C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,15 +48,6 @@
 				A4863CAB2CEE07AC00BFE19C /* AdSDKTutorial.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A4863CBF2CEE095000BFE19C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A4863CC02CEE095000BFE19C /* AdSDKCore.xcframework */,
-				A4863CC12CEE095000BFE19C /* AdSDKSwiftUI.xcframework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,7 +361,7 @@
 			repositoryURL = "https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release";
 			requirement = {
 				kind = exactVersion;
-				version = 6.6.0;
+				version = 6.7.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
