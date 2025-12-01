@@ -373,7 +373,7 @@
 			repositoryURL = "https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release";
 			requirement = {
 				kind = exactVersion;
-				version = 6.6.0;
+				version = 6.7.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
