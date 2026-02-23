@@ -7,13 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A409B37C2D2BEF5800BB8114 /* AdSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A409B37B2D2BEF5800BB8114 /* AdSDK */; };
+		A43A246A2F4C797B003D48DB /* AdSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A43A24692F4C797B003D48DB /* AdSDK.xcframework */; };
+		A43A246B2F4C797B003D48DB /* AdSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A43A24692F4C797B003D48DB /* AdSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A43A246C2F4C797B003D48DB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A43A246B2F4C797B003D48DB /* AdSDK.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A43A24692F4C797B003D48DB /* AdSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = AdSDK.xcframework; sourceTree = "<group>"; };
 		A4863CAB2CEE07AC00BFE19C /* AdSDKTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdSDKTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4863CC02CEE095000BFE19C /* AdSDKCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = AdSDKCore.xcframework; sourceTree = "<group>"; };
-		A4863CC12CEE095000BFE19C /* AdSDKSwiftUI.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = AdSDKSwiftUI.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -29,18 +43,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A409B37C2D2BEF5800BB8114 /* AdSDK in Frameworks */,
+				A43A246A2F4C797B003D48DB /* AdSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A43A24682F4C797B003D48DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A43A24692F4C797B003D48DB /* AdSDK.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A4863CA22CEE07AC00BFE19C = {
 			isa = PBXGroup;
 			children = (
 				A4863CAD2CEE07AC00BFE19C /* AdSDKTutorial */,
-				A4863CBF2CEE095000BFE19C /* Frameworks */,
+				A43A24682F4C797B003D48DB /* Frameworks */,
 				A4863CAC2CEE07AC00BFE19C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,15 +75,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A4863CBF2CEE095000BFE19C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A4863CC02CEE095000BFE19C /* AdSDKCore.xcframework */,
-				A4863CC12CEE095000BFE19C /* AdSDKSwiftUI.xcframework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -72,6 +85,7 @@
 				A4863CA72CEE07AC00BFE19C /* Sources */,
 				A4863CA82CEE07AC00BFE19C /* Frameworks */,
 				A4863CA92CEE07AC00BFE19C /* Resources */,
+				A43A246C2F4C797B003D48DB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -82,7 +96,6 @@
 			);
 			name = AdSDKTutorial;
 			packageProductDependencies = (
-				A409B37B2D2BEF5800BB8114 /* AdSDK */,
 			);
 			productName = AdSDKTutorial;
 			productReference = A4863CAB2CEE07AC00BFE19C /* AdSDKTutorial.app */;
@@ -113,7 +126,6 @@
 			mainGroup = A4863CA22CEE07AC00BFE19C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				A409B37A2D2BEF5800BB8114 /* XCRemoteSwiftPackageReference "nextgen-adsdk-ios-release" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A4863CAC2CEE07AC00BFE19C /* Products */;
@@ -366,25 +378,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		A409B37A2D2BEF5800BB8114 /* XCRemoteSwiftPackageReference "nextgen-adsdk-ios-release" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/VM-Mobile-SDK/nextgen-adsdk-ios-release";
-			requirement = {
-				kind = exactVersion;
-				version = 6.7.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		A409B37B2D2BEF5800BB8114 /* AdSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A409B37A2D2BEF5800BB8114 /* XCRemoteSwiftPackageReference "nextgen-adsdk-ios-release" */;
-			productName = AdSDK;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A4863CA32CEE07AC00BFE19C /* Project object */;
 }

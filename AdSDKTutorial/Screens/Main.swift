@@ -7,8 +7,7 @@
 //
 
 import SwiftUI
-import AdSDKCore
-import AdSDKSwiftUI
+import AdSDK
 
 // MARK: - View
 @main
@@ -22,6 +21,7 @@ struct Main: App {
                 case .loading:
                     Text("Loading")
                         .task { await viewModel.configure() }
+
                 case .ready(let adService):
                     VStack {
                         NavigationLink("Inline Ads List") {
@@ -47,19 +47,19 @@ struct Main: App {
 final class MainViewModel {
     var state: AppState = .loading
 
-    private var service: AdService?
+    private var provider: AdServiceProviderInterface = AdServiceProvider()
 }
 
 extension MainViewModel {
     func configure() async {
         do {
-            let service = try await AdService(
+            try await provider.configure(
                 networkID: 1800,
                 cacheSize: 100, // Can be skipped
                 configurationTimeout: 60 // Can be skipped
             )
 
-            self.service = service
+            let service = try await provider.get()
             state = .ready(service)
 
         } catch {
