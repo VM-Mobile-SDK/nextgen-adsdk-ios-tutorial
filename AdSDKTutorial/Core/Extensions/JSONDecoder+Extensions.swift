@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AdSDKCore
+import AdSDK
 
 extension JSONDecoder {
     /// Convenient method to decode `Decodable` objects with possible `AdError` throwing.

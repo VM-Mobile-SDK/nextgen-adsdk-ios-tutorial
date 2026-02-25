@@ -6,11 +6,11 @@
 //  Copyright © 2024 Virtual Minds GmbH. All rights reserved.
 //
 
-import AdSDKCore
 import Foundation
 import SwiftUI
+import AdSDK
 
-struct TutorialRenderer: View, AdRenderer {
+struct TutorialRenderer: AdRenderer {
     @State var controller: TutorialController
 
     var body: some View {
