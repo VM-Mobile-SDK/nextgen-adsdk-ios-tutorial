@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AdSDKCore
+import AdSDK
 
 struct TargetTapURLHandler: TargetURLHandler {
     var onReceive: @MainActor (TargetURL) -> Void

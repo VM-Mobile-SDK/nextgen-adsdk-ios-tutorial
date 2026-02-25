@@ -6,9 +6,8 @@
 //  Copyright © 2024 Virtual Minds GmbH. All rights reserved.
 //
 
-import AdSDKCore
-import AdSDKSwiftUI
 import SwiftUI
+import AdSDK
 
 // MARK: - View
 struct InlineList: View {

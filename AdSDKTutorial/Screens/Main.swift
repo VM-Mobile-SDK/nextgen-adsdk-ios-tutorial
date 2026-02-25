@@ -7,8 +7,7 @@
 //
 
 import SwiftUI
-import AdSDKCore
-import AdSDKSwiftUI
+import AdSDK
 
 // MARK: - View
 @main
@@ -47,6 +46,7 @@ struct Main: App {
                                 }
                             }
                         }
+
                 case .ready(let adService):
                     VStack {
                         NavigationLink("Inline Ads List") {
@@ -75,13 +75,13 @@ struct Main: App {
 final class MainViewModel {
     var state: AppState = .loading
 
-    private var service: AdService?
+    private var provider: AdServiceProviderInterface = AdServiceProvider()
 }
 
 extension MainViewModel {
     func configure(isDataCollectionAllowed: Bool) async {
         do {
-            let service = try await AdService(
+            try await provider.configure(
                 networkID: 1800,
                 cacheSize: 20, // Can be skipped
                 configurationTimeout: 60, // Can be skipped
@@ -90,6 +90,7 @@ extension MainViewModel {
                 )
             )
 
+            let service = try await provider.get()
             service.setTrackingGlobalParameter(\.externalUID, .init(uid: "UID"))
             service.removeTrackingGlobalParameter(\.externalUID)
 
@@ -109,7 +110,6 @@ extension MainViewModel {
             // }
 
             service.registerRenderer(TutorialRenderer.self, forName: "tutorialad")
-            self.service = service
             state = .ready(service)
 
         } catch {
@@ -119,7 +119,8 @@ extension MainViewModel {
 
     func onLocaleChange() async {
         do {
-            try await service?.flushCache()
+            let service = try await provider.get()
+            try await service.flushCache()
         } catch {
             print("Error during flushing cache: \(error.localizedDescription)")
         }

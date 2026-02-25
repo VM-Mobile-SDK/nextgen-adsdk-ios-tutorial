@@ -7,8 +7,7 @@
 //
 
 import SwiftUI
-import AdSDKCore
-import AdSDKSwiftUI
+import AdSDK
 
 // MARK: - View
 struct Basket: View {
