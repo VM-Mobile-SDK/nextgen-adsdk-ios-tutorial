@@ -86,6 +86,7 @@ extension MainViewModel {
                 )
             )
 
+            let service = try await provider.get()
             service.setTrackingGlobalParameter(\.externalUID, .init(uid: "UID"))
             service.removeTrackingGlobalParameter(\.externalUID)
 
@@ -98,7 +99,6 @@ extension MainViewModel {
                  isDataCollectionAllowed.toCookieAccess()
             )
 
-            let service = try await provider.get()
             state = .ready(service)
 
         } catch {
