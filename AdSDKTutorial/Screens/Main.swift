@@ -118,7 +118,8 @@ extension MainViewModel {
 
     func onLocaleChange() async {
         do {
-            try await service?.flushCache()
+            let service = try await provider.get()
+            try await service.flushCache()
         } catch {
             print("Error during flushing cache: \(error.localizedDescription)")
         }
