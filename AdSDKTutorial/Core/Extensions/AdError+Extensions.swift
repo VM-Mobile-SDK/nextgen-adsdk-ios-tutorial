@@ -6,11 +6,14 @@
 //  Copyright © 2024 Virtual Minds GmbH. All rights reserved.
 //
 
-import AdSDKCore
+import Foundation
+import AdSDK
 
 extension AdError: @retroactive LocalizedError {
     public var errorDescription: String? {
         switch self {
+        case .configuration:
+            "AdService configuration failed"
         case .rendererInit(let name):
             "Renderer \(name) failed during init"
         case .adLoadingInProgress:
@@ -49,6 +52,8 @@ extension AdError: @retroactive LocalizedError {
             "Network: resource unavailable"
         case .reachabilityUnavailable:
             "Network: internet connection issue"
+        case .requestCancelled:
+            "Network: request was cancelled"
         case .unspecifiedNetworkError(let description):
             "Network: \(description)"
         case .serverErrorResponse(let message):
