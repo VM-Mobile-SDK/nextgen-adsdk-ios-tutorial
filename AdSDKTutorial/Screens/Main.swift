@@ -87,21 +87,21 @@ extension MainViewModel {
                 configurationTimeout: 60, // Can be skipped
                 globalParameters: GlobalParameters( // Can be skipped
                     accessMode: isDataCollectionAllowed.toAccessMode()
+                ),
+                adRequestGlobalParameters: AdRequestGlobalParameters( // Can be skipped
+                    cookiesAccess: isDataCollectionAllowed.toCookieAccess()
                 )
             )
 
             let service = try await provider.get()
-            service.setTrackingGlobalParameter(\.externalUID, .init(uid: "UID"))
-            service.removeTrackingGlobalParameter(\.externalUID)
-
-            service.setAdRequestGlobalParameter(\.externalUID, .init(uid: "UID"))
-            service.removeAdRequestGlobalParameter(\.externalUID)
-
-            // Can have unique global parameters for ad requests
-            service.setAdRequestGlobalParameter(
-                \.cookiesAccess,
-                 isDataCollectionAllowed.toCookieAccess()
+            service.setGlobalParameters(
+                .init(\.externalUID, .init(uid: "UID"))
             )
+
+            service.removeGlobalParameter(\.externalUID)
+
+            service.setAdRequestGlobalParameters(.init(\.isIpIdentified, false))
+            service.removeAdRequestGlobalParameter(\.isIpIdentified)
 
             // do {
             //     try await service.setCacheSize(50)
